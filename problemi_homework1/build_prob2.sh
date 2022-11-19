@@ -1,0 +1,1 @@
+gcc -o prob2 prob2_v2.c

@@ -1,1 +1,6 @@
-algoritmi alla magistrale di ingegneria informatica.
+# algoritmi
+# algol
+# algol
+# algol
+# algorithm
+# algorithm

@@ -1,0 +1,1 @@
+gcc -o bst main_bst.c bst.c

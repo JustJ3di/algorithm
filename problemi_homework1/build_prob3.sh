@@ -1,0 +1,1 @@
+gcc -o prob3 prob3.c
