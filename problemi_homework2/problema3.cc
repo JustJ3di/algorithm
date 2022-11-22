@@ -3,87 +3,105 @@
 using namespace std;
 
 
-int zero_matrix(vector<vector<int> > a) {
-    int n = a.size();
-    int m = a[0].size();
+int max_area_1d(vector <int> arr)
+{
+    //fallito ogni tentativo di utilizzare solo un indice! lo stack è necessario per salvarmi gli indici per il calcolo dell'area massima.
 
-    int ans = 0;
-    vector<int> d(m, -1), d1(m), d2(m);
-    stack<int> st;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if (a[i][j] == 1)
-                d[j] = i;
+    stack<int> result;
+
+    int top_val;
+
+    int max_area = 0; 
+
+
+    int area = 0; 
+
+    int i = 0;
+    while (i < arr.size()) {
+        
+        if (result.empty() || arr[result.top()] <= arr[i])
+            result.push(i++);
+
+        else {
+
+            top_val = arr[result.top()];
+            result.pop();
+            area = top_val * i;
+
+            if (!result.empty())
+                area = top_val * (i - result.top() - 1);
+            max_area = max(area, max_area);
         }
-
-        for (int j = 0; j < m; ++j) {
-            while (!st.empty() && d[st.top()] <= d[j])
-                st.pop();
-            d1[j] = st.empty() ? -1 : st.top();
-            st.push(j);
-        }
-        while (!st.empty())
-            st.pop();
-
-        for (int j = m - 1; j >= 0; --j) {
-            while (!st.empty() && d[st.top()] <= d[j])
-                st.pop();
-            d2[j] = st.empty() ? m : st.top();
-            st.push(j);
-        }
-        while (!st.empty())
-            st.pop();
-
-        for (int j = 0; j < m; ++j)
-            ans = max(ans, (i - d[j]) * (d2[j] - d1[j] - 1));
     }
-    return ans;
+
+
+    while (!result.empty()) {
+        top_val = arr[result.top()];
+        result.pop();
+        area = top_val * i;
+        if (!result.empty())
+            area = top_val * (i - result.top() - 1);
+
+        max_area = max(area, max_area);
+    }
+    return max_area;
 }
 
-
-int sub_zero_matrix(vector <vector<int>> &m)
+int maxRectangle(vector <vector <int> > &A)
 {
-
-    int c = m[0].size(),r = m.size();
-
-    vector <vector <int> > dp;
-    dp.resize(r, vector<int>(c));
-
-    int result = 0;
-
-    for (size_t i = 0; i < r; i++)
+    int C = A[0].size();
+    int R = A.size();
+    // Calculate area for first row and initialize it as
+    // result
+    vector <int> arr;
+    for (size_t i = 0; i < C; i++)
     {
-        for (size_t j = 0; j < c; j++)
-        {
-            if(m[i][j] == 0)
-            {
-                if(i==0 && j==0)
-                    dp[i][j] == 1;
-                else if(i)
-                    dp[i][j] = 1+dp[i-1][j];
-                else if(j)
-                    dp[i][j] = 1+dp[i][j-1];
-                else 
-                    dp[i][j] = 1+min(dp[i][j-1],min(dp[i-1][j],dp[i-1][j-1]));
-                
-            }
-            result = max(result, dp[i][j]);
-        }
-        
-    }
-
-    for (size_t i = 0; i < r; i++)
-    {
-        for (size_t j = 0; j < c; j++)
-        {
-            cout<<dp[i][j]<<" ";
-        }cout<<endl;
-        
+        arr.push_back(A[0][i]);
     }
     
     
+    int result = max_area_1d(arr);
+
+
+    for (int i = 1; i < R; i++) {
+
+        for (int j = 0; j < C; j++)
+            if (A[i][j])
+                A[i][j] += A[i - 1][j];
+
+        result = max(result, max_area_1d(A[i]));
+    }
+
     return result;
 }
+
+int area_zero_matrix(vector<vector<int>> &matrix) {
+    int rows = matrix.size();
+    if (rows == 0) return 0;
+    int cols = matrix[0].size();
+    if (cols == 0) return 0;
+    vector<vector<int>> max_x(rows, vector<int>(cols, 0));
+    int area = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] == 0) {
+                if (j == 0)
+                    max_x[i][j] = 1;
+                else
+                    max_x[i][j] = max_x[i][j - 1] + 1;
+                int y = 1;
+                int x = cols;
+                while ((i - y + 1 >= 0) && (matrix[i - y + 1][j] == 0)) {
+                    x = min(x, max_x[i - y + 1][j]);
+                    area = max(area, x * y);
+                    y++;
+                }
+            }
+        }
+    }
+    return area;
+}
+
 
 int main(int argc, char const *argv[])
 {
@@ -92,12 +110,30 @@ int main(int argc, char const *argv[])
                                 {0,1,0,0},
                                 {1,0,0,1}};
 
-    int max = zero_matrix(b);
+
+    for (size_t i = 0; i < b.size(); i++)
+    {
+        for (size_t j = 0; j < b[0].size(); j++)
+        {
+            if(b[i][j]==1)b[i][j]=0;
+            else b[i][j]=1;
+        }
+        
+    }
+    
+    for (size_t i = 0; i < b.size(); i++)
+    {
+        for (auto i : b[i])
+        {
+            cout<<i<<" ";
+        }cout<<endl;
+        
+    }
     
 
-
+    int max = maxRectangle(b);
+    
     cout<<max<<endl;
-    cout<<sub_zero_matrix(b);
 
     return 0;
 }
