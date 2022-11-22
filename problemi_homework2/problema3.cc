@@ -2,7 +2,7 @@
 
 using namespace std;
 
-/*
+
 int zero_matrix(vector<vector<int> > a) {
     int n = a.size();
     int m = a[0].size();
@@ -40,57 +40,64 @@ int zero_matrix(vector<vector<int> > a) {
     return ans;
 }
 
-*/
 
-
-//Sfrutto l'idea dell algoritmo di kadan per contare gli zeri contigui in un vettore
-
-int max_zero_array(vector <int> &array){
-
-    int number_of_zero = 0;
-    int number_of_zero_partial = 0;
-
-    for(auto e : array)
-    {
-        if(e==0)number_of_zero_partial += 1;
-        number_of_zero = (number_of_zero > number_of_zero_partial ? number_of_zero : number_of_zero_partial);
-        if(e != 0)number_of_zero_partial = 0;
-    }
-
-    return number_of_zero;
-
-}
-
-
-
-int main(int argc, char const *argv[])
+int sub_zero_matrix(vector <vector<int>> &m)
 {
-    int b[4][4] = { {0,1,0,0},
-                    {1,0,0,0},
-                    {0,1,0,0},
-                    {1,0,0,1}};
 
-    int max = 0;
+    int c = m[0].size(),r = m.size();
 
-    for (size_t i = 0; i < 4; i++)
+    vector <vector <int> > dp;
+    dp.resize(r, vector<int>(c));
+
+    int result = 0;
+
+    for (size_t i = 0; i < r; i++)
     {
-        vector <int> my(4);
-        for (size_t j = i; j < 4; j++)
+        for (size_t j = 0; j < c; j++)
         {
-            for (size_t c = 0; c < 4; c++)
+            if(m[i][j] == 0)
             {
-                my[c] += b[j][c];
+                if(i==0 && j==0)
+                    dp[i][j] == 1;
+                else if(i)
+                    dp[i][j] = 1+dp[i-1][j];
+                else if(j)
+                    dp[i][j] = 1+dp[i][j-1];
+                else 
+                    dp[i][j] = 1+min(dp[i][j-1],min(dp[i-1][j],dp[i-1][j-1]));
+                
             }
-            int sum_current = max_zero_array(my);
-            max = (max > sum_current?max: sum_current);   
-
+            result = max(result, dp[i][j]);
         }
         
     }
+
+    for (size_t i = 0; i < r; i++)
+    {
+        for (size_t j = 0; j < c; j++)
+        {
+            cout<<dp[i][j]<<" ";
+        }cout<<endl;
+        
+    }
+    
+    
+    return result;
+}
+
+int main(int argc, char const *argv[])
+{
+    vector <vector<int> >b = {  {0,1,0,0},
+                                {1,0,0,0},
+                                {0,1,0,0},
+                                {1,0,0,1}};
+
+    int max = zero_matrix(b);
     
 
 
     cout<<max<<endl;
+    cout<<sub_zero_matrix(b);
 
     return 0;
 }
