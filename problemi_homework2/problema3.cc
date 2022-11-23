@@ -1,4 +1,7 @@
-#include<bits/stdc++.h>
+//#include<bits/stdc++.h>
+#include <stack>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -75,12 +78,12 @@ int maxRectangle(vector <vector <int> > &A)
     return result;
 }
 
-int area_zero_matrix(vector<vector<int>> &matrix) {
+int area_zero_matrix(vector<vector<int> > &matrix) {
     int rows = matrix.size();
     if (rows == 0) return 0;
     int cols = matrix[0].size();
     if (cols == 0) return 0;
-    vector<vector<int>> max_x(rows, vector<int>(cols, 0));
+    vector<vector<int> > max_x(rows, vector<int>(cols, 0));
     int area = 0;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -105,7 +108,7 @@ int area_zero_matrix(vector<vector<int>> &matrix) {
 
 int main(int argc, char const *argv[])
 {
-    vector <vector<int> >b = {  {0,1,0,0},
+    vector <vector<int> > b = { {0,1,0,0},
                                 {1,0,0,0},
                                 {0,1,0,0},
                                 {1,0,0,1}};
@@ -120,16 +123,7 @@ int main(int argc, char const *argv[])
         }
         
     }
-    
-    for (size_t i = 0; i < b.size(); i++)
-    {
-        for (auto i : b[i])
-        {
-            cout<<i<<" ";
-        }cout<<endl;
-        
-    }
-    
+
 
     int max = maxRectangle(b);
     
