@@ -50,7 +50,7 @@ int max_area_1d(vector <int> arr)
     return max_area;
 }
 
-int maxRectangle(vector <vector <int> > &A)
+int max_area_2d(vector <vector <int> > &A)
 {
     int C = A[0].size();
     int R = A.size();
@@ -108,6 +108,8 @@ int area_zero_matrix(vector<vector<int> > &matrix) {
 
 int main(int argc, char const *argv[])
 {
+    
+
     vector <vector<int> > b = { {0,1,0,0},
                                 {1,0,0,0},
                                 {0,1,0,0},
@@ -125,7 +127,7 @@ int main(int argc, char const *argv[])
     }
 
 
-    int max = maxRectangle(b);
+    int max = max_area_2d(b);
     
     cout<<max<<endl;
 

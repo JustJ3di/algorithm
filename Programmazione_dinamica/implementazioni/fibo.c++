@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// long fib(int n, unordered_map<int, long> mp) (wrong)
 long fib(int n, unordered_map<int, long> &mp) // correct
 {
     if (mp.find(n) != mp.end())
