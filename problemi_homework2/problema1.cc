@@ -247,27 +247,17 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
 
 int main()
 {
-    int n = 6; //righe 
-    int m = 20; //colonne
+    int n; //righe 
+    int m; //colonne
     vector <vector <int> > boards;
 
-    boards.resize(n, vector <int>(m));
-
-    for (size_t i = 0; i < n; i++)
-    {
-        for (size_t j = 0; j < m; j++)
-        {
-            boards[i][j] = 1;
-        }
-        
-    }
     
 
-   cin>>n;
-   cin>>m;
-   boards.resize(n,vector<int>(m));
-   for (size_t i = 0; i < n; i++)
-   {
+    cin>>n;
+    cin>>m;
+    boards.resize(n,vector<int>(m));
+    for (size_t i = 0; i < n; i++)
+    {
         for (size_t j = 0; j < m; j++)
         {
             int a ;
@@ -275,21 +265,9 @@ int main()
             boards[i][j] = a;
         }
         
-   }
- 
-
-    print_boards(boards);
-/*
-    srand(time(NULL));
-    for (size_t k = 0; k < 4; k++)
-    {
-        int i = rand()%n;
-        int j = rand()%m;
-        boards[i][j] = 0;
     }
-*/   
+   
     print_boards(boards);
-
 
     vector <Pos> solution = find_min_path(boards);
 

@@ -20,7 +20,10 @@ int bsc(vector <int> arr,int x, int low, int high)
             else                  // x is on the left side
                 high = mid - 1;
         }
+        
 }
+
+
 
 int main(int argc, char const *argv[])
 {
@@ -43,15 +46,14 @@ int main(int argc, char const *argv[])
         int q;
         cin>>q;
 
-        for (size_t i = 0; i < len(h); i++)
-        {
-            
-        }
-        
-
 
     }
     
+
+    vector <int> a = {1,2,3,4,5,6,7};
+    
+    cout<<bsc(a,6,0,6)<<endl;
+
     
 
     return 0;
