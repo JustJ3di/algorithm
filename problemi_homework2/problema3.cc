@@ -1,7 +1,4 @@
-//#include<bits/stdc++.h>
-#include <stack>
-#include <vector>
-#include <iostream>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -13,14 +10,10 @@ int max_area_1d(vector <int> arr)
     stack<int> result;
 
     int top_val;
-
     int max_area = 0; 
-
-
     int area = 0; 
 
     int i = 0;
-    //Cerco indice sinistro
     while (i < arr.size()) {
         
         if (result.empty() || arr[result.top()] <= arr[i])
@@ -38,7 +31,7 @@ int max_area_1d(vector <int> arr)
         }
     }
 
-    //Cerco indice destro
+
     while (!result.empty()) {
         top_val = arr[result.top()];
         result.pop();
@@ -51,12 +44,12 @@ int max_area_1d(vector <int> arr)
     return max_area;
 }
 
-int max_area_2d(vector <vector <int> > &A)
+int maxRectangle(vector <vector <int> > &A)
 {
     int C = A[0].size();
     int R = A.size();
-
-
+    // Calculate area for first row and initialize it as
+    // result
     vector <int> arr;
     for (size_t i = 0; i < C; i++)
     {
@@ -79,12 +72,12 @@ int max_area_2d(vector <vector <int> > &A)
     return result;
 }
 
-int area_zero_matrix(vector<vector<int> > &matrix) {
+int area_zero_matrix(vector<vector<int>> &matrix) {
     int rows = matrix.size();
     if (rows == 0) return 0;
     int cols = matrix[0].size();
     if (cols == 0) return 0;
-    vector<vector<int> > max_x(rows, vector<int>(cols, 0));
+    vector<vector<int>> max_x(rows, vector<int>(cols, 0));
     int area = 0;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -109,12 +102,10 @@ int area_zero_matrix(vector<vector<int> > &matrix) {
 
 int main(int argc, char const *argv[])
 {
-    
-
-    vector <vector<int> > b = { {0,1,0,0},
-                                {1,0,0,0},
-                                {0,1,0,0},
-                                {1,0,0,1}};
+    vector <vector<int> >b = {  {0,1,1,0},
+                                {0,0,0,0},
+                                {0,0,0,0},
+                                {1,0,1,1}};
 
 
     for (size_t i = 0; i < b.size(); i++)
@@ -126,9 +117,18 @@ int main(int argc, char const *argv[])
         }
         
     }
+    
+    for (size_t i = 0; i < b.size(); i++)
+    {
+        for (auto i : b[i])
+        {
+            cout<<i<<" ";
+        }cout<<endl;
+        
+    }
+    
 
-
-    int max = max_area_2d(b);
+    int max = maxRectangle(b);
     
     cout<<max<<endl;
 
