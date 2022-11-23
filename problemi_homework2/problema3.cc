@@ -20,6 +20,7 @@ int max_area_1d(vector <int> arr)
     int area = 0; 
 
     int i = 0;
+    //Cerco indice sinistro
     while (i < arr.size()) {
         
         if (result.empty() || arr[result.top()] <= arr[i])
@@ -37,7 +38,7 @@ int max_area_1d(vector <int> arr)
         }
     }
 
-
+    //Cerco indice destro
     while (!result.empty()) {
         top_val = arr[result.top()];
         result.pop();
@@ -54,8 +55,8 @@ int max_area_2d(vector <vector <int> > &A)
 {
     int C = A[0].size();
     int R = A.size();
-    // Calculate area for first row and initialize it as
-    // result
+
+
     vector <int> arr;
     for (size_t i = 0; i < C; i++)
     {
