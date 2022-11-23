@@ -48,8 +48,7 @@ int maxRectangle(vector <vector <int> > &A)
 {
     int C = A[0].size();
     int R = A.size();
-    // Calculate area for first row and initialize it as
-    // result
+
     vector <int> arr;
     for (size_t i = 0; i < C; i++)
     {
