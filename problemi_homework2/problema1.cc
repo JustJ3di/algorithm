@@ -27,7 +27,7 @@ void print_boards(vector <vector<int> > &boards)
     {
         for (size_t j = 0; j < boards[i].size(); j++)
         {
-            cout<<boards[i][j];
+            cout<<boards[i][j]<<" ";
         }cout<<"\n";
         
     }
@@ -205,11 +205,8 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
     visit.resize(boards.size(),vector <int> (boards[0].size()));
 
     vector <vector <int> >max = pre_processing_matrix(boards);
-    cout<<endl;
-    print_boards(max);
 
-
-    vector <Pos> real_ending(2000);
+    vector <Pos> real_ending(3000);
 
     if (is_there_a_wall(max)) 
     {
@@ -247,31 +244,42 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
 
 int main()
 {
-    int n; //righe 
-    int m; //colonne
+
     vector <vector <int> > boards;
 
-    
-
-    cin>>n;
-    cin>>m;
-    boards.resize(n,vector<int>(m));
-    for (size_t i = 0; i < n; i++)
+    cout<<"Numero casi di test: ";
+    int T;
+    cin>>T;
+    while(T--)
     {
-        for (size_t j = 0; j < m; j++)
+        int n; //righe 
+        int m; //colonne
+        cout<<"inserire dimensione matrice \n inserire righe: ";
+        cin>>n;
+        cout<<"\ninserire colonne: ";
+        cin>>m;
+        boards.resize(n,vector<int>(m));
+        for (size_t i = 0; i < n; i++)
         {
-            int a ;
-            cin >> a;
-            boards[i][j] = a;
+            for (size_t j = 0; j < m; j++)
+            {
+                int a ;
+                cin >> a;
+                boards[i][j] = a;
+            }
+            
         }
+    
+        cout<<"Matrice inserita :\n";
+        print_boards(boards);
+        cout<<endl;
+        vector <Pos> solution = find_min_path(boards);
         
+        display_solution(solution);
+
     }
-   
-    print_boards(boards);
 
-    vector <Pos> solution = find_min_path(boards);
 
-    display_solution(solution);
 
     return 0;
 }

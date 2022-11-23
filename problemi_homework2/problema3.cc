@@ -72,33 +72,6 @@ int maxRectangle(vector <vector <int> > &A)
     return result;
 }
 
-int area_zero_matrix(vector<vector<int>> &matrix) {
-    int rows = matrix.size();
-    if (rows == 0) return 0;
-    int cols = matrix[0].size();
-    if (cols == 0) return 0;
-    vector<vector<int>> max_x(rows, vector<int>(cols, 0));
-    int area = 0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            if (matrix[i][j] == 0) {
-                if (j == 0)
-                    max_x[i][j] = 1;
-                else
-                    max_x[i][j] = max_x[i][j - 1] + 1;
-                int y = 1;
-                int x = cols;
-                while ((i - y + 1 >= 0) && (matrix[i - y + 1][j] == 0)) {
-                    x = min(x, max_x[i - y + 1][j]);
-                    area = max(area, x * y);
-                    y++;
-                }
-            }
-        }
-    }
-    return area;
-}
-
 
 int main(int argc, char const *argv[])
 {
