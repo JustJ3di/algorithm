@@ -2,6 +2,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <stdint.h>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ all indice n-esimo .
 */
 
 
-int64_t dp(int n, unordered_map<int, unsigned int64_t> &mp) 
+int64_t dp(int n, unordered_map<int, size_t> &mp) 
 {
     if (mp.find(n) != mp.end())
         return mp[n];
@@ -58,7 +59,7 @@ int main()
     
     */
 
-    unordered_map <int,unsigned int64_t>a;
+    unordered_map <int,size_t>a;
     int T;
     cout<<"Numero di casi di test: ";
     cin>>T;
