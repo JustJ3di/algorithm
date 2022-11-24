@@ -13,7 +13,7 @@ all indice n-esimo .
 */
 
 
-int64_t dp(int n, unordered_map<int, int64_t> &mp) 
+int64_t dp(int n, unordered_map<int, unsigned int64_t> &mp) 
 {
     if (mp.find(n) != mp.end())
         return mp[n];
@@ -28,16 +28,49 @@ int64_t dp(int n, unordered_map<int, int64_t> &mp)
 int main()
 {
     
-    unordered_map <int,int64_t>a;
-    //casi di test
+    /*
+    Possibili test
+    
+    TEST 1:
+    Input: 0
+    Output atteso:
+    Insieme nullo non contemplato.
+    
+    TEST 2:
+    Input: 2
+    Output atteso:
+    2
+    
+    TEST 3:
+    Input: 4
+    Output atteso:
+    10
+
+    TEST 4
+    Input: 15
+    Output atteso:
+    10349536
+
+    TEST 5 
+    Input :5
+    Output atteso: 
+    26
+    
+    */
+
+    unordered_map <int,unsigned int64_t>a;
     int T;
     cout<<"Numero di casi di test: ";
     cin>>T;
     while(T--)
     {   
-        int n;
+        unsigned int n;
         cout<<"Inserire cardinalità insieme :";
         cin>>n;
+        if (n==0)
+            {   cout<<"Insieme nullo non contemplato.\n";
+                continue;
+            }
         int64_t res = dp(n,a);
         cout<<"risultato : "<<res<<endl;
     }

@@ -294,7 +294,7 @@ int main()
     1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 
     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
 
-    Output atteso
+    Output atteso:
     PATH = 
     Solution size = 0
 
