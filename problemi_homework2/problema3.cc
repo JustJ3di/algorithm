@@ -5,11 +5,10 @@ using namespace std;
 
 int max_area_1d(vector <int> arr)
 {
-    //fallito ogni tentativo di utilizzare solo un indice! lo stack è necessario per salvarmi gli indici per il calcolo dell'area massima.
 
     stack<int> result;
 
-    int top_val;
+    int current_value;
     int max_area = 0; 
     int area = 0; 
 
@@ -21,26 +20,27 @@ int max_area_1d(vector <int> arr)
 
         else {
 
-            top_val = arr[result.top()];
+            current_value = arr[result.top()];
             result.pop();
-            area = top_val * i;
+            area = current_value * i;
 
             if (!result.empty())
-                area = top_val * (i - result.top() - 1);
+                area = current_value * (i - result.top() - 1);
             max_area = max(area, max_area);
         }
     }
 
 
     while (!result.empty()) {
-        top_val = arr[result.top()];
+        current_value = arr[result.top()];
         result.pop();
-        area = top_val * i;
+        area = current_value * i;
         if (!result.empty())
-            area = top_val * (i - result.top() - 1);
+            area = current_value * (i - result.top() - 1);
 
         max_area = max(area, max_area);
     }
+    
     return max_area;
 }
 
@@ -58,6 +58,7 @@ int maxRectangle(vector <vector <int> > &A)
     
     int result = max_area_1d(arr);
 
+    cout<<"result = "<<result<<endl;
 
     for (int i = 1; i < R; i++) {
 
@@ -74,7 +75,7 @@ int maxRectangle(vector <vector <int> > &A)
 
 int main(int argc, char const *argv[])
 {
-    vector <vector<int> >b = {  {0,1,1,0},
+    vector <vector<int> >b = {  {0,0,1,0},
                                 {0,0,0,0},
                                 {0,0,0,0},
                                 {1,0,1,1}};
