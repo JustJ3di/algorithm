@@ -237,7 +237,7 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
             
         }
         
-    if(real_ending.size()==2000)real_ending.clear();
+    if(real_ending.size()==3000)real_ending.clear();
 
     return real_ending;
 }
@@ -245,18 +245,87 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
 int main()
 {
 
+    /*
+    Possibili test
+    input
+    matrice
+
+    TEST 1
+    righe   : 7 
+    colonne : 13
+
+    1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 0 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 0 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 0 1 1 0 1 1 1 0 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 0 1 1 1
+    
+    Output atteso:
+    PATH = 6,0 -> 6,1 -> 6,2 -> 6,3 -> 6,4 -> 6,5 -> 6,6 -> 6,7 -> 5,7 -> 4,7 -> 3,7 -> 3,6 -> 2,6 -> 1,6 -> 1,7 -> 0,7 -> 0,8 -> 0,9 -> 0,10 -> 0,11 -> 0,12
+    solution size = 21
+
+
+    TEST 2
+
+    righe   : 6 
+    colonne : 20
+
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+
+    Output atteso:
+    PATH = 0,0 -> 0,1 -> 0,2 -> 0,3 -> 0,4 -> 0,5 -> 0,6 -> 0,7 -> 0,8 -> 0,9 -> 0,10 -> 0,11 -> 0,12 -> 0,13 -> 1,13 -> 1,14 -> 2,14 -> 2,15 -> 2,16 -> 2,17 -> 1,17 -> 1,18 -> 0,18 -> 0,19
+    Solution size = 24
+
+    TEST 3
+    righe   : 6
+    colonne : 19
+
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 
+    1 1 1 1 1 1 1 0 1 1 1 0 1 1 1 1 1 1 1 
+    1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 
+    1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+
+    Output atteso
+    PATH = 
+    Solution size = 0
+
+    TEST 4
+
+    righe   : 5
+    colonne : 10
+
+    1 1 1 1 1 1 1 1 1 1
+    1 1 0 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1
+    1 1 0 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1
+    
+    Output atteso:
+    PATH = 
+    Solution size = 0
+
+    */
+
     vector <vector <int> > boards;
 
-    cout<<"Numero casi di test: ";
+    cout<<"Numero casi di TEST: ";
     int T;
     cin>>T;
     while(T--)
     {
         int n; //righe 
         int m; //colonne
-        cout<<"inserire dimensione matrice \n inserire righe: ";
+        cout<<"Dimensione matrice.\nInserire righe e colonne separate da uno spazio: ";
         cin>>n;
-        cout<<"\ninserire colonne: ";
         cin>>m;
         boards.resize(n,vector<int>(m));
         for (size_t i = 0; i < n; i++)
