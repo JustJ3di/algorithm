@@ -1,1 +1,1 @@
-clang++  -o  problema3 problema3.cc 
+g++  -o  problema3 problema3.cc 
