@@ -76,7 +76,7 @@ int main(int argc, char const *argv[])
     int count_case = 0;
     while (scanf("%d",&n))
     {
-        if(n<0 || n > 16)return;
+        if(n<0 || n > 16)return 0;
         vector <int> set;
         int i = 1;
         while(i <= n)
@@ -95,7 +95,6 @@ int main(int argc, char const *argv[])
     }
     
 
-    cout<<sum_is_prime(2,6)<<endl;
 
     return 0;
 }
