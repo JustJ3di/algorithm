@@ -1,32 +1,19 @@
 #include <iostream>
+#include <unistd.h>
 #include <vector>
-#include<unistd.h>
+
+using namespace std;
+
+
+#define MAX_TEST 10
+#define R_MAX 20
+#define C_MAX 20
+
+int matrix[R_MAX*C_MAX];
 
 
 /*
-
-
 Soluzione con backtracking la complessità attesa nel caso peggiore, è O(n*(4^(n*m))) dove n è il numero di righe.
-L'algoritmo prova ricorsivamente di muoversi in 4 direzioni (top, left, right, down) verifica quindi se la mossa è valida,
-una risposta affermativa di quest'utlima corrisponderà ad un altra chiamata ricorsiva nel nuovo punto calcolato.
-
-
-Per ridurre una complessità altrimenti sempre esponenziale si adottano delle contromisure:
-1)Considerando la possibilità che sulla prima riga ci sia un valore invalido (valori che siano "0" o "1" vicino a "0")
-l'algoritmo ricorsivo non viene chiamato per quel punto.
-2)In alcuni casi particolari è facilmente verificabile che non vi è alcuna soluzione.
-    Esempio:
-    Matrice con muro.
-    1 1 1 0 1 
-    1 1 1 1 1
-    1 1 1 1 1
-    1 1 1 0 1
-    1 1 1 1 1
-Risulta immediato che la colonna 3 della matrice risultà un muro per ogni possibile percorso in quanto contiene posizone invalide per ogni riga.
-
-Quindi la funzione is_there_a_wall() cerca dei muri nel percorso, la risposta affermativa di quest'ultima risparmia completamento il tempo di esecuzione delle chiamate ricorsive.
-Dando da subito la risposta 0 indicando l'assenza di percorsi possibili.
-
 
 */
 
@@ -41,7 +28,7 @@ typedef struct pos{
 
 }Pos;
 
-//stampa la boards, nel caso di stampa post soluzione fa vedere anche i valori "- 1" assegnati che percorrono il percorso trovato. 
+//stampa la boards nel caso di stampa post soluzioen fa vedere anche i valori "- 1" assegnati che percorrono il percorso trovato. 
 void print_boards(vector <vector<int> > &boards)
 {
     for (size_t i = 0; i < boards.size(); i++)
@@ -108,9 +95,9 @@ void backtracking(vector < vector <int> > &visit ,vector <Pos> &ending_solution,
     {  
         
         /*-------------------------------------------------------------------------------------------------   
-        |    Qui verifico se la soluzione corrente è già maggiore di una soluzione trovata in precedenza,  |
+        |    Qui verifico se la soluzione corrente è già maggiore si una soluzione trovata in precedenza,  |
         |    in queso caso non c'è alcun motivo di continuare la ricerca,                                  |
-        |    quindi applico un "pruning" dell'albero di ricorsione.                                        |
+        |    quindi applico un "pruning dell'albero di ricorsione."                                        |
         ---------------------------------------------------------------------------------------------------*/
         current_solution.push_back(current_posizion);
         if(ending_solution.empty()==false)
@@ -215,9 +202,9 @@ bool is_there_a_wall(vector <vector <int> > &matrix)
 //La funzione find_min_path inizia già il backtracking, prunacompletamente dei rami se portano a percorsi senza soluzione,
 //o se non hanno punti di partenza.
 //Infine lancia per ogni punto di partenza disponibile il backtracking.
-vector <Pos> find_min_path(vector <vector <int> > &boards)
+int find_min_path(vector <vector <int> > &boards)
 {
-
+    cout<<"start\n";
     vector <Pos> curr;
     vector <Pos> ending;
 
@@ -229,12 +216,13 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
 
     int max_path = 4000;
     vector <Pos> real_ending(max_path);
-
+    
     if (is_there_a_wall(max)) 
     {
         real_ending.clear();
-        return real_ending;
+        return 0;
     }
+    cout<<"superato primo check\n";
     int i,j;
     for (i = 0; i < max.size(); i++)
         {
@@ -260,131 +248,76 @@ vector <Pos> find_min_path(vector <vector <int> > &boards)
         }
         
     if(real_ending.size()==max_path)real_ending.clear();
-
-    return real_ending;
+    cout<<"fine"<<endl;
+    return real_ending.size();
 }
 
-int main()
+
+
+int main(int argc, char const *argv[])
 {
+    srand(getpid());
 
-    /*
-    Possibili test
-    input
-    matrice
+    int i,j,k,d,l,r,c;
 
-    TEST 1
-    righe   : 7 
-    colonne : 13
-
-    1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 0 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 0 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 0 1 1 0 1 1 1 0 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 0 1 1 1
-    
-    Output atteso:
-    PATH = 6,0 -> 6,1 -> 6,2 -> 6,3 -> 6,4 -> 6,5 -> 6,6 -> 6,7 -> 5,7 -> 4,7 -> 3,7 -> 3,6 -> 2,6 -> 1,6 -> 1,7 -> 0,7 -> 0,8 -> 0,9 -> 0,10 -> 0,11 -> 0,12
-    solution size = 21
-
-
-    TEST 2
-
-    righe   : 6 
-    colonne : 20
-
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-
-    Output atteso:
-    PATH = 0,0 -> 0,1 -> 0,2 -> 0,3 -> 0,4 -> 0,5 -> 0,6 -> 0,7 -> 0,8 -> 0,9 -> 0,10 -> 0,11 -> 0,12 -> 0,13 -> 1,13 -> 1,14 -> 2,14 -> 2,15 -> 2,16 -> 2,17 -> 1,17 -> 1,18 -> 0,18 -> 0,19
-    Solution size = 24
-
-    TEST 3
-    righe   : 6
-    colonne : 19
-
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 
-    1 1 1 1 1 1 1 0 1 1 1 0 1 1 1 1 1 1 1 
-    1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 
-    1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 1 
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-
-    Output atteso:
-    PATH = 
-    Solution size = 0
-
-    TEST 4
-
-    righe   : 5
-    colonne : 10
-
-    1 1 1 1 1 1 1 1 1 1
-    1 1 0 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1
-    1 1 0 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1
-    
-    Output atteso:
-    PATH = 
-    Solution size = 0
-
-    TEST 5
-    righe   :  6 
-    colonne :  12
-
-    1 1 1 1 1 1 1 1 1 1 0 1
-    1 1 0 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 0 1 1 1 1 1
-    1 1 0 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 0 1 1 1 1
-
-    Output atteso:
-    PATH = 5,0 -> 5,1 -> 5,2 -> 5,3 -> 5,4 -> 5,5 -> 4,5 -> 3,5 -> 3,4 -> 2,4 -> 1,4 -> 1,5 -> 0,5 -> 0,6 -> 0,7 -> 0,8 -> 1,8 -> 1,9 -> 2,9 -> 2,10 -> 2,11
-    Solution size = 21
-
-    */
-
-    vector <vector <int> > boards;
-
-    cout<<"Numero casi di TEST: ";
-    int T;
-    cin>>T;
-    while(T--)
+    for (i = 0; i < MAX_TEST; i++)
     {
-        int n; //righe 
-        int m; //colonne
-        cout<<"Dimensione matrice.\nInserire righe e colonne separate da uno spazio: ";
-        cin>>n;
-        cin>>m;
-        boards.resize(n,vector<int>(m));
-        for (size_t i = 0; i < n; i++)
+        cout<<"indice test : "<<i<<"\n";
+        int_least64_t rand_i = 0;
+        int_least64_t rand_j = 0;
+        r = (rand()%(R_MAX-5)) + 5;
+        c = (rand()%(C_MAX-6)) + 6;
+        for (j = 0; j < r; j++)
         {
-            for (size_t j = 0; j < m; j++)
+            for (d = 0; d < c; d++)
             {
-                int a ;
-                cin >> a;
-                boards[i][j] = a;
+                matrix[j*c + d] = 1;
             }
             
         }
-        cout<<"Matrice inserita :\n";
-        print_boards(boards);
-        cout<<endl;
-        vector <Pos> solution = find_min_path(boards);
+        int k = r/3 + c/3;
         
-        display_solution(solution);
+        for (l = 0; l < k; l++)
+        {
+        
+            rand_i = rand()%r;
+            
+            rand_j = rand()%c;
+            
 
+            matrix[rand_i*c + rand_j] = 0;
+        }
+        
+        vector < vector <int> > board;
+        board.resize(r, vector<int> (c));
+
+        for ( int p = 0; p < r; p++)
+        {
+            for(j = 0;j<c;j++)
+                board[p][j] = matrix[p*c + j];
+        }
+        
+        print_boards(board);
+        
+
+        int res1 = find_min_path(board) - 1;
+        cout<<res1<<endl; 
+        int res2;//metti qui il secondo algoritmo
+
+        if(res1!=res2)
+            {
+                printf("Errore trovato!\n");
+                for (int j = 0; j < r; j++)
+                {
+                    for(int p = 0;p<c;p++)
+                        matrix[j*c + p];
+                }
+                
+            }
+        
     }
 
-
+    
 
     return 0;
 }

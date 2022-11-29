@@ -3,7 +3,6 @@
 using namespace std;
 
 /*questo merge sort conta anche il numero degli scambi tra elementi adiacenti effetuati*/
-
 void merge(int *A, int start, int center,int end, int *num_op){
     
 
@@ -12,8 +11,6 @@ void merge(int *A, int start, int center,int end, int *num_op){
     int op_count = 0;
     int *L = new int[n1+1];
     int *R = new int[n2+1];
-    //int *L = malloc(sizeof(int)*(n1+1));
-    //int *R =malloc(sizeof(int)*(n2+1));
 
     for(int i = 0; i < n1; i++)
         L[i] = A[i + start];

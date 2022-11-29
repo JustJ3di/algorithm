@@ -33,10 +33,7 @@ void merge(int arr[], int p, int q, int r,int *count) {
             arr[k] = M[j]; //altrimenti procedo con il secondo 
             j++;
             *count += q-k+j;
-            /*printf("i = %d  \n",i );
-            /*printf("j = %d  \n", j);
-            /*printf("mid = %d  \n", q);
-            */
+
         }
 
         k++;

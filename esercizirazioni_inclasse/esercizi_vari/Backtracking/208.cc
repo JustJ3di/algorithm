@@ -12,7 +12,8 @@ int  pathcnt = 0;
 
 int check(int st) {
     int Q[25], Qt, i, j, used[25] = {}, tn;
-    Q[Qt = 0] = st;
+    Q[0] = st;
+    Qt = 0;
     for(i = 0; i <= Qt; i++) {
         tn = Q[i];
         if(tn == E) return 0;
