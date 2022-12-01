@@ -24,7 +24,7 @@ l'algoritmo ricorsivo non viene chiamato per quel punto.
     1 1 1 1 1
 Risulta immediato che la colonna 3 della matrice risultà un muro per ogni possibile percorso in quanto contiene posizone invalide per ogni riga.
 
-Quindi la funzione is_there_a_wall() cerca dei muri nel percorso, la risposta affermativa di quest'ultima risparmia completamento il tempo di esecuzione delle chiamate ricorsive.
+La funzione is_there_a_wall() cerca dei muri nel percorso, la risposta affermativa di quest'ultima risparmia completamento il tempo di esecuzione delle chiamate ricorsive.
 Dando da subito la risposta 0 indicando l'assenza di percorsi possibili.
 
 

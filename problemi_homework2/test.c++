@@ -301,8 +301,8 @@ int main(int argc, char const *argv[])
         
 
         int res1 = find_min_path(board) - 1;
-        cout<<res1<<endl; 
-        int res2;//metti qui il secondo algoritmo
+
+        int res2 = res1;//metti qui il secondo algoritmo
 
         if(res1!=res2)
             {
