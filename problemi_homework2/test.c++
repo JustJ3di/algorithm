@@ -17,7 +17,6 @@ Soluzione con backtracking la complessità attesa nel caso peggiore, è O(n*(4^(
 
 */
 
-using namespace std;
 
 //Struttura definita per identificare una posizione all'interno della matrice.
 typedef struct pos{

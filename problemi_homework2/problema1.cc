@@ -3,16 +3,19 @@
 #include<unistd.h>
 
 
-/*
+/*------------------------------------------------------------------------------------------------------------------------------------
+
+                                    Emanuele d'Ajello - Marco D'Elia 
+                                    Homework 2 - Problema 1
 
 
-Soluzione con backtracking la complessità attesa nel caso peggiore, è O(n*(4^(n*m))) dove n è il numero di righe.
-L'algoritmo prova ricorsivamente di muoversi in 4 direzioni (top, left, right, down) verifica quindi se la mossa è valida,
+La soluzione con backtracking ha complessità attesa nel caso peggiore, è O(n*(4^(n*m))) dove n è il numero di righe ed m è il numero di colonne.
+L'algoritmo prova ricorsivamente a muoversi in 4 direzioni (top, left, right, down) verifica quindi se la mossa è valida,
 una risposta affermativa di quest'utlima corrisponderà ad un altra chiamata ricorsiva nel nuovo punto calcolato.
 
 
 Per ridurre una complessità altrimenti sempre esponenziale si adottano delle contromisure:
-1)Considerando la possibilità che sulla prima riga ci sia un valore invalido (valori che siano "0" o "1" vicino a "0")
+1)Considerando la possibilità che sulla prima colonna ci sia un valore invalido (valori che siano "0" o "1" vicino a "0")
 l'algoritmo ricorsivo non viene chiamato per quel punto.
 2)In alcuni casi particolari è facilmente verificabile che non vi è alcuna soluzione.
     Esempio:
@@ -24,11 +27,19 @@ l'algoritmo ricorsivo non viene chiamato per quel punto.
     1 1 1 1 1
 Risulta immediato che la colonna 3 della matrice risultà un muro per ogni possibile percorso in quanto contiene posizone invalide per ogni riga.
 
-La funzione is_there_a_wall() cerca dei muri nel percorso, la risposta affermativa di quest'ultima risparmia completamento il tempo di esecuzione delle chiamate ricorsive.
-Dando da subito la risposta 0 indicando l'assenza di percorsi possibili.
+La funzione is_there_a_wall() cerca dei muri nel percorso, la risposta affermativa di quest'ultima 
+risparmia completamente il tempo di esecuzione delle chiamate ricorsive; dando da subito la risposta 0 indicando l'assenza di percorsi possibili.
 
+L'input richiesto è:
+-il numero di casi di test
+-le dimensione in n:numero di righe ed m:numero di colonne della matrice da testare
+-i valori puntuali della matrice
+output:
+Il percorso descritto in termini di dimensione e di spostamenti indicati in coordinate (x:riga , y:colonna)
+la lunghezza del percorso rappresentata con un intero.
+In caso di non soluzione, non verrà stampato il percorso e la lunghezza sarà 0.
 
-*/
+--------------------------------------------------------------------------------------------------------------------------------------*/
 
 using namespace std;
 
