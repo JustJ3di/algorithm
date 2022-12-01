@@ -10,12 +10,12 @@ using namespace std;
 |                               Homework 2 - PROBLEMA 2                                            |
 |                                                                                                  |
 |    Una volta ricavata la ricorrenza dp(n) = (n-1)dp(n-2) + dp(n-1).                              |
-|    è immediato ricavare i casi base , d(1) e d(2) i quali hanno rispettivamente valore 1 e 2.    |
+|    è immediato ricavare i casi base , dp(1) e dp(2) i quali hanno rispettivamente valore 1 e 2.  |
 |    Si utilizza una map per la memoization per tenere traccia del problemi già risolti            |
 |    all indice n-esimo .                                                                          |
 --------------------------------------------------------------------------------------------------*/
 
-//La complessità asintotica al netto della ricorrenza è O(n)
+//Utilizzando la memoization si sfrutta il riuso dei sotto problemi rendendo la complessità O(n).
 int64_t dp(int n, unordered_map<int, size_t> &mp) 
 {
     if (mp.find(n) != mp.end())
