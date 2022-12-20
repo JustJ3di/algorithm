@@ -1,0 +1,1 @@
+g++ -o ese esercizio.cc 
