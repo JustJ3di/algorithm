@@ -5,16 +5,20 @@
 using namespace std;
 
    /*
-    Si è utilizzato l'approccio di programmazione dinamica top-down + memoization.
+        Emanuele d'Ajello M 63001435
 
-    Vengono quindi qui elencati i 5 punti:(n = lunghezza della stringa)
+    Si è utilizzato l'approccio di programmazione dinamica top-down + memoization (bottom-up + tabulation).
+
+    Vengono quindi qui elencati i 5 punti:
 
     
     1)  Definizione del sottoproblema :
-    
+    1.1)Numero sottoproblemi
     2)  Guessing:
+    2.1)Numero di scelte
 
     3) La ricorrenza ricavata nel approccio è:
+
 
     4) Il tempo totale è uguale a: #sottoproblemi*tempo-per-sottoproblema = 
 
